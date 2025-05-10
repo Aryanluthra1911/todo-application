@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100vh;
+    background-color: rgb(13, 19, 30);
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    min-height: 80px;
+    background-color: rgb(13, 19, 30);
+    padding-right: 40px;
+}
+#left1{
+    width:500px;
+    display: flex;
+    align-items: last baseline;
+    justify-content: space-around;
+}
+#logo_name{
+    width:200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 30px;
+}
+#logo{
+    border: none;
+    background-color: rgb(13, 19, 30);
+}
+#name{
+    color: #ffff;
+}
+.b1{
+    border: none;
+    background-color: rgb(13, 19, 30);
+    color: #ffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;    
+}
+.b1:hover{
+    text-decoration: underline;
+    font-size: large;
+}
+#right1{
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+.b2{
+    font-size: medium;
+    height: 1cm;
+    width: 80px;
+    border-radius: 1cm;
+    background-color: #ffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.b2:hover{
+    color: #ffff;
+    width: 100px;
+    background-color: rgb(10, 16, 26);
+    transform: scale(1.05);
+}
+#main{
+    display: flex;
+    width: 100%;
+    height: 650px;
+}
+#left2{
+    width: 40%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+#left2 h1{
+    color: #ffff;
+    font-weight: bolder;
+    font-size: 300%;
+    padding-bottom: 30px;
+}
+#left2 p{
+    color: rgb(170, 180, 200);
+    font-size: larger;
+    padding-bottom: 50px;
+}
+#left2 button{
+    height: 1cm;
+    width: 150px;
+    background-color: rgb(255, 102, 102); 
+    font-weight: bolder;
+    color: black;
+    border-radius: 1cm;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.active{
+    font-size: large;
+}
+#left2 button:hover{
+    font-size: medium;
+    height: 1.2cm;
+    width: 170px;
+}
