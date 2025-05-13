@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(5, 14, 21);
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    height: 50px;
+    width: 100%;
+}
+#logo_name{
+    width:75%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-right: 30px;
+}
+#logo{
+    padding-top: 20px;
+    border: none;
+    background-color: rgb(5, 14, 21);
+}
+#cname{
+    padding-top: 20px;
+    color: #ffff;
+}
+#logout_block{
+    padding-top: 10px;
+    width: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#logout{
+    border: none;
+    border-radius: 0.5cm;
+    height: 45px;
+    width: 45px;
+    background-color: rgb(5, 14, 21);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+#logout:hover{
+    background-color: #c53030;
+    transform: scale(1.05);
+}

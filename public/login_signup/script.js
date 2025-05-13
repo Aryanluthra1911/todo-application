@@ -4,6 +4,8 @@ let loginform = document.getElementById('loginform');
 let signupform = document.getElementById('signupform');
 let messagebox = document.getElementById('message')
 let url = window.location.href
+let logo_button = document.getElementById('logo');
+let cname = document.getElementById('cname');
 
 function move_to_signup(){
     axios.get('/signup')
@@ -17,6 +19,14 @@ var move_to_login = ()=>{
     axios.get('/login')
         .then(()=>{
             window.location.href = '/login';
+        }).catch((error)=>{
+            console.error('Request failed:', error);
+        })
+}
+function move_to_home(){
+    axios.get('/homepage')
+        .then(()=>{
+            window.location.href = '/homepage';
         }).catch((error)=>{
             console.error('Request failed:', error);
         })
@@ -50,7 +60,7 @@ if (url === "http://localhost:4444/login") {
                     
                 }
                 else{
-                    window.location.href = '/login_success';
+                    window.location.href = '/dashboard';
                 }
             }).catch((error)=>{
                 console.error('Request failed:', error);
@@ -77,7 +87,7 @@ if (url === "http://localhost:4444/signup") {
                 password:password
             }).then((res)=>{
                 if(res.data.success){
-                    window.location.href = '/signup_success';
+                    window.location.href = '/dashboard';
                 }
                 else {
                     messagebox.innerText= 'Account already exists, Redirecting to Login...';
@@ -101,5 +111,12 @@ if(url === "http://localhost:4444/signup" || url ==="http://localhost:4444/login
         console.log("clicked");
         move_to_signup();
     })
+    logo_button.addEventListener('click',()=>{
+        move_to_home();
+    })
+    cname.addEventListener('click',()=>{
+        move_to_home();
+    })
 }
+
 
