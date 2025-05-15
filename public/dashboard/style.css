@@ -85,7 +85,7 @@ header{
     border-radius: 0.5cm;
     
 }
-#tasks{
+#filters{
     padding-top: 10px;
     font-size: small;
     color: 	#747474;
@@ -93,21 +93,23 @@ header{
     flex-direction: column;
 }
 .box{
+    border: none;
     margin-top: 10px;
     padding: 10px;
-    height: 20px;
+    height: 45px;
     width: 100%;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     font-size: larger;
+    background-color: rgb(23, 23, 23);
 }
 .box svg{
     padding-right: 20px;
 }
 .active{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px rgba(88, 88, 88, 0.4);
     background-color: #212121;
 }
 .box:hover{
@@ -124,6 +126,63 @@ header{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     width: 50%;
     height: 97vh;
+}
+#mid h1{
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#task_area{
+    max-height: 60%;
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+#task_block{
+    margin-top: 20px;
+    height: 50px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #212121;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(88, 88, 88, 0.4)
+}
+#task{
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 70%;
+    height: 100%;
+}
+#button_area{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+#button_area button{
+    border-radius: 10px;
+    height: 35px;
+    width: 30px;
+    background-color: #212121;
+    border: none;
+}
+#done:hover{
+    background-color: rgb(40, 167, 69);
+}
+#delete:hover{
+    background-color: #c53030;
+}
+#more:hover{
+    background-color: #747474;
 }
 #details_block{
     margin-left: 13px ;
