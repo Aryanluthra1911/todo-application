@@ -71,7 +71,6 @@ if (url === "http://localhost:4444/login") {
 
 if (url === "http://localhost:4444/signup") {
     signupform.addEventListener('submit',(event)=>{
-        console.log("button clicked");
         event.preventDefault();
         let name = (document.getElementById('name')).value;
         let email = (document.getElementById('email')).value;
