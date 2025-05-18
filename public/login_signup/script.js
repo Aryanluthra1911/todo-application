@@ -24,9 +24,9 @@ var move_to_login = ()=>{
         })
 }
 function move_to_home(){
-    axios.get('/homepage')
+    axios.get('/')
         .then(()=>{
-            window.location.href = '/homepage';
+            window.location.href = '/';
         }).catch((error)=>{
             console.error('Request failed:', error);
         })

@@ -32,7 +32,7 @@ app.get('/dashboard',authenticateToken,(req,res)=>{
     res.sendFile(path.join(__dirname,'public','dashboard','dashboard.html'))
 })
 
-app.get('/homepage',(req,res)=>{
+app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname,'public','homepage','homepage.html'))
 })
 const signup_schema =  new mongoose.Schema({
@@ -132,7 +132,7 @@ mongoose.connect('mongodb://localhost:27017/login_credentials')
     .then(()=>{
         console.log('mongodb connected');
         app.listen(port, () => {
-            console.log(`http://localhost:` + port +`/homepage`);
+            console.log(`http://localhost:` + port);
         });
     }).catch((err)=>{
         console.log("server")
