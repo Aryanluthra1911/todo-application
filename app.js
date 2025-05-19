@@ -33,14 +33,13 @@ const task_schema = new mongoose.Schema({
         required:true,
     },
     due_date:Date,
-    priotity:String,
+    priority:String,
     status:String
 })
 
-function get_email(){
+function get_email(token){
     const decode = jwt.verify(token, JWT_SECRET_KEY);
-    const email = decode.email; // 👈 Access email field
-    return email;
+    return decode.email;
 }
 
 
@@ -59,12 +58,33 @@ function authenticateToken(req, res, next) {
 }
 
 const credentials = mongoose.model('credentials',signup_schema);
-const tasks = mongoose.model('tasks',task_schema);
+const tasks_credentials = mongoose.model('tasks_credentials',task_schema);
 
 app.get('/dashboard',authenticateToken,(req,res)=>{
     res.sendFile(path.join(__dirname,'public','dashboard','dashboard.html'))
 })
 
+app.post('/dashboard',async(req,res)=>{
+    const token = req.cookies.token;
+    let email = get_email(token);
+    let {title,due_date,priority}= req.body;
+    let status= 'pending';
+    try{
+        const new_task = new tasks_credentials({
+            email:email,
+            title:title,
+            due_date:due_date,
+            priority:priority,
+            status:status,
+        })
+        await new_task.save()
+        return res.json({
+            messsage:"data_added"
+        })
+    }catch(err){
+        console.error('Login Error:', err);
+    }
+})
 
 
 app.get('/',(req,res)=>{

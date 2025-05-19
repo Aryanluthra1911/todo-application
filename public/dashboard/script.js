@@ -89,19 +89,31 @@ task_name.addEventListener('input',(ev)=>{
                     <div class="box3">
                         priority :
                         <select id="input_priority" name="priority">
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
-                    </select>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
                     </div>
                     
                     `
 })
 add_form.addEventListener('submit',(ev)=>{
     ev.preventDefault();
-    let t = (document.getElementById('task_name')).value;
-    if (t){
-        add_task(t);
+    let title = (document.getElementById('task_name')).value;
+    let due_date = (document.getElementById('due_date')).value;
+    let priority = (document.getElementById('input_priority')).value;
+
+    if (title && due_date && priority){
+        axios.post('/dashboard',{
+            title,
+            due_date,
+            priority
+        }).then(()=>{
+            add_task(title);
+        }).catch((err)=>{
+            console.error('Error:', err);
+        })
+        
     }
     
 })
