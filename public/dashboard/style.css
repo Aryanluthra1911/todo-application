@@ -124,7 +124,7 @@ header{
     flex-direction: column;
     background-color: rgb(23, 23, 23);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-    width: 50%;
+    width: 60%;
     height: 97vh;
 }
 #mid h1{
@@ -206,22 +206,23 @@ header{
     box-shadow: 0 0 10px #747474;
 }
 #add_task_block{
-    min-height: 15%;
+    min-height: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #212121;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(88, 88, 88, 0.4)
+}
+#add_block{
+    height: 50px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-#add_block{
-    margin-top: 20px;
-    height: 50px;
-    width: 95%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: #212121;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(88, 88, 88, 0.4)
+    
 }
 #task_name{
     margin-left: 20px;
@@ -254,7 +255,7 @@ header{
     flex-direction: column;
     background-color: rgb(23, 23, 23);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-    width: 30%;
+    width: 20%;
     height: 97vh;
 }
 #head{
@@ -273,20 +274,62 @@ header{
     width: 100%;
     height: 50%;
 }
-#due_block{
+.box2{
+    padding-top: 20px;
     display: flex;
     align-items: center;
     justify-content: left;
     padding-left: 20px;
     width: 90%;
+    color: #747474;
 }
-#date{
+#info{
+    width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    width: 150px;
-    background-color: #171717;
-    border: 0;
-    border-radius: 25px;
+}
+.box3{
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    width: 90%;
+    color:#ffff;
+    font-size: large;
+    padding-bottom: 10px;
+}
+#due_date{
+    height: 25px;
+    padding-left: 10px;
+    border-radius: 0.5cm;
+    background-color:#3a3a3a;
+    border: none;
+    outline:none;
+}
+#input_priority{
+    border-radius: 0.5cm;
+    background-color:#3a3a3a;
+    padding-left: 10px;
+    
+    width: 120px;
+    height: 25px;
+    border: none;
+    outline:none;
+}
+#container{
+    width: 100%;
+    height: 85%;
+}
+#save{
+    font-size: larger;
+    width: 80%;
+    height: 40px;
+    color: black;
+    
+}
+#save:hover{
+    background-color: #28a745;
+    color: #ffff;
 }

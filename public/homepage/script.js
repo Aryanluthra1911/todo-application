@@ -1,7 +1,8 @@
 let login = document.getElementById('login');
 let signup = document.getElementById('signup');
 let logo_button = document.getElementById('logo');
-let name = document.getElementById('name');
+let cname = document.getElementById('cname');
+let url = window.location.href
 let start = document.getElementById('start')
 
 function move_to_signup(){
@@ -28,7 +29,12 @@ function move_to_home(){
             console.error('Request failed:', error);
         })
 }
-
+axios.get('/')
+    .then((res)=>{
+        if (res.data.message === 'token exists'){
+            window.location.href='/dashboard'
+        }
+    })
 login.addEventListener('click',(ev)=>{
     move_to_login()
 })
@@ -38,7 +44,7 @@ signup.addEventListener('click',(ev)=>{
 logo_button.addEventListener('click',()=>{
     move_to_home();
 })
-name.addEventListener('click',()=>{
+cname.addEventListener('click',()=>{
     move_to_home();
 })
 start.addEventListener('click',(ev)=>{

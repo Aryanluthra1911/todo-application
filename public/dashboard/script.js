@@ -5,6 +5,9 @@ let filters = document.getElementById('filters');
 let heading = document.getElementById('heading');
 heading.innerText="All Tasks";
 let add_form= document.getElementById('add_block');
+let info = document.getElementById('info');
+let task_name = document.getElementById('task_name');
+
 
 
 function move_to_home(){
@@ -78,9 +81,27 @@ filters.addEventListener('click',(ev)=>{
         heading.innerText="Completed Tasks"
     }
 })
+task_name.addEventListener('input',(ev)=>{
+    info.innerHTML=`<div class="box3">
+                        due date : 
+                        <input type="date" id="due_date"></input>
+                    </div>
+                    <div class="box3">
+                        priority :
+                        <select id="input_priority" name="priority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    </div>
+                    
+                    `
+})
 add_form.addEventListener('submit',(ev)=>{
     ev.preventDefault();
     let t = (document.getElementById('task_name')).value;
-    add_task(t);
+    if (t){
+        add_task(t);
+    }
+    
 })
-

@@ -15,26 +15,6 @@ app.use(cookieParser())
 
 const JWT_SECRET_KEY='HELLO';
 
-function authenticateToken(req, res, next) {
-    const token = req.cookies.token;
-    if (!token) return res.status(401).json({ message: 'Access Denied' });
-
-    try {
-        const verified = jwt.verify(token, JWT_SECRET_KEY);
-        req.user = verified;
-        next();
-    } catch (err) {
-        res.status(400).json({ message: 'Invalid Token' });
-    }
-}
-
-app.get('/dashboard',authenticateToken,(req,res)=>{
-    res.sendFile(path.join(__dirname,'public','dashboard','dashboard.html'))
-})
-
-app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'public','homepage','homepage.html'))
-})
 const signup_schema =  new mongoose.Schema({
     name:String,
     email:{
@@ -42,15 +22,64 @@ const signup_schema =  new mongoose.Schema({
         required:true,
         unique:true,
     },
-    password:String
+    password:String,
 
 });
 
+const task_schema = new mongoose.Schema({
+    email:String,
+    title:{
+        type:String,
+        required:true,
+    },
+    due_date:Date,
+    priotity:String,
+    status:String
+})
+
+function get_email(){
+    const decode = jwt.verify(token, JWT_SECRET_KEY);
+    const email = decode.email; // 👈 Access email field
+    return email;
+}
+
+
+function authenticateToken(req, res, next) {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ message: 'Access Denied' });
+
+    try {
+        const verified = jwt.verify(token, JWT_SECRET_KEY);
+        
+        req.user = verified;
+        next();
+    } catch (err) {
+        res.status(400).json({ message: 'Invalid Token' });
+    }
+}
+
 const credentials = mongoose.model('credentials',signup_schema);
+const tasks = mongoose.model('tasks',task_schema);
+
+app.get('/dashboard',authenticateToken,(req,res)=>{
+    res.sendFile(path.join(__dirname,'public','dashboard','dashboard.html'))
+})
+
+
+
+app.get('/',(req,res)=>{
+    const token = req.cookies.token;
+    if (!token){
+        res.sendFile(path.join(__dirname,'public','homepage','homepage.html'))
+    }
+    else return res.redirect('/dashboard');
+    
+})
 
 app.get('/login',(req,res)=>{
     res.sendFile(path.join(__dirname, 'public','login_signup','login.html'));
 })
+
 app.post('/login',async(req,res)=>{
     let {email,password}=req.body;
     try{
@@ -85,6 +114,7 @@ app.post('/login',async(req,res)=>{
         })
     }
 })
+
 app.get('/login_success',(req,res)=>{
     res.sendFile(path.join(__dirname,'public','login_signup','login_page.html'))
 })
@@ -92,6 +122,7 @@ app.get('/login_success',(req,res)=>{
 app.get('/signup',(req,res)=>{
     res.sendFile(path.join(__dirname,'public','login_signup','signup.html'))
 })
+
 app.post('/signup',async(req,res)=>{
     let {name,email,password} = req.body;
     try{
@@ -101,7 +132,6 @@ app.post('/signup',async(req,res)=>{
             success: false, 
             message: 'Email already exists' 
         });
-    
         const New_credentials = new credentials({
             name: name,
             email: email,
@@ -119,6 +149,7 @@ app.post('/signup',async(req,res)=>{
         console.error(err)
     }
 })
+
 app.get('/signup_success',(req,res)=>{
     res.sendFile(path.join(__dirname,'public','login_signup','signup_page.html'))
 })
