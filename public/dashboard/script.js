@@ -7,7 +7,8 @@ heading.innerText="All Tasks";
 let add_form= document.getElementById('add_block');
 let info = document.getElementById('info');
 let task_name = document.getElementById('task_name');
-
+let tasks = [];
+let current_tasks=[]
 
 
 function move_to_home(){
@@ -18,10 +19,15 @@ function move_to_home(){
             console.error('Request failed:', error);
         })
 }
-function add_task(t){
+
+
+function show_data(arr){
     let block = document.getElementById('task_area');
-    block.innerHTML= `<div id="task_block">
-                        <div id="task"></div>
+    block.innerHTML = '';
+    for(let i = 0;i<arr.length;i++){
+        let div = document.createElement('div')
+        div.classList.add('task_block');
+        const taskhtml= `<div id="task">${arr[i].title}</div>
                         <div id="button_area">
                             <button id="done">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,11 +48,31 @@ function add_task(t){
                                 </svg>
                             </button>
                         </div>
-                    </div>`
-    let task = document.getElementById('task');
-    task.innerText=t;
+                        `
+        div.innerHTML = taskhtml;
+        block.appendChild(div);
+    }
 }
 
+async function fetch_data() {
+    try {
+        const res = await axios.get('/task');
+        return res.data.data;
+    } catch (error) {
+        console.error('Error fetching tasks:', error);
+        return [];
+    }
+}
+
+function filteration(tasks,check){
+    let current_tasks = [];
+    tasks.forEach(item => {
+        if(item.status === check){
+            current_tasks.push(item)
+        }
+    });
+    return current_tasks
+}
 logo_button.addEventListener('click',()=>{
     move_to_home();
 })
@@ -60,7 +86,7 @@ logout.addEventListener('click',()=>{
         })
 });
 
-filters.addEventListener('click',(ev)=>{
+filters.addEventListener('click',async(ev)=>{
     let element= ev.target;
     let id = element.getAttribute('id');
 
@@ -68,20 +94,28 @@ filters.addEventListener('click',(ev)=>{
     for(let i =0;i<allButtons.length;i++){
         allButtons[i].classList.remove('active')
     }
+    tasks = await fetch_data();
     if(id=="all"){
         allButtons[0].classList.add('active');
         heading.innerText="All Tasks"
+        current_tasks = tasks
+        
     }
     if(id=="upcoming"){
         allButtons[1].classList.add('active');
         heading.innerText="Upcoming Tasks"
+        current_tasks = tasks.filter(item=> item.status=== 'pending');
+
     }
     if(id=="completed"){
         allButtons[2].classList.add('active');
-        heading.innerText="Completed Tasks"
+        heading.innerText="Completed Tasks";
+        current_tasks = tasks.filter(item => item.status === 'completed');
     }
+    console.log(tasks);
+    show_data(current_tasks)
 })
-task_name.addEventListener('input',(ev)=>{
+task_name.addEventListener('click',(ev)=>{
     info.innerHTML=`<div class="box3">
                         due date : 
                         <input type="date" id="due_date"></input>
@@ -109,7 +143,8 @@ add_form.addEventListener('submit',(ev)=>{
             due_date,
             priority
         }).then(()=>{
-            add_task(title);
+            tasks = fetch_data();
+            show_data(tasks)
         }).catch((err)=>{
             console.error('Error:', err);
         })

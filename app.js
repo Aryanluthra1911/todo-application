@@ -36,6 +36,8 @@ const task_schema = new mongoose.Schema({
     priority:String,
     status:String
 })
+const credentials = mongoose.model('credentials',signup_schema);
+const tasks_credentials = mongoose.model('tasks_credentials',task_schema);
 
 function get_email(token){
     const decode = jwt.verify(token, JWT_SECRET_KEY);
@@ -57,8 +59,22 @@ function authenticateToken(req, res, next) {
     }
 }
 
-const credentials = mongoose.model('credentials',signup_schema);
-const tasks_credentials = mongoose.model('tasks_credentials',task_schema);
+app.get('/task',async(req,res)=>{
+    try{
+        const token = req.cookies.token;
+        const mail = get_email(token)
+        const todolist = await tasks_credentials.find({email:mail})
+        res.json({
+            message:'data fetched',
+            data:todolist
+        })
+    }catch(err){
+        res.json({
+            message:'error in data finding',
+            error:err.message
+        })
+    }
+})
 
 app.get('/dashboard',authenticateToken,(req,res)=>{
     res.sendFile(path.join(__dirname,'public','dashboard','dashboard.html'))
