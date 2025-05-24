@@ -68,6 +68,7 @@ header{
     display: flex;
     height: 97vh;
     width: 100%;
+    gap: 13px;
 }
 #sidebar{
     display: flex;
@@ -117,7 +118,6 @@ header{
     background-color: #212121;
 }
 #mid{
-    margin-left: 13px ;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -126,24 +126,27 @@ header{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     width: 60%;
     height: 97vh;
+    gap: 10px;
 }
 #mid h1{
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 15%;
+    height: 13%;
     width: 100%;
+    
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 #task_area{
     overflow-y: auto;
-    max-height: 78%;
+    max-height: calc(100% - 15%);
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 20px;
 }
 #task_area::-webkit-scrollbar{
     width: 8px;
@@ -172,7 +175,7 @@ header{
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(88, 88, 88, 0.4)
 }
-#task{
+.task{
     margin-left: 20px;
     display: flex;
     align-items: center;
@@ -193,15 +196,15 @@ header{
     background-color: #212121;
     border: none;
 }
-#done:hover{
+.done:hover{
     background-color: rgb(40, 167, 69);
     box-shadow: 0 0 10px rgb(40, 167, 69);
 }
-#delete:hover{
+.delete:hover{
     background-color: #c53030;
     box-shadow: 0 0 10px #c53030;
 }
-#more:hover{
+.more:hover{
     background-color: #747474;
     box-shadow: 0 0 10px #747474;
 }
@@ -211,7 +214,7 @@ header{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     background-color: #212121;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(88, 88, 88, 0.4)
@@ -248,7 +251,6 @@ header{
     box-shadow: 0 0 6px #747474;
 }
 #details_block{
-    margin-left: 13px ;
     display: flex;
     align-items: center;
     justify-content: top;

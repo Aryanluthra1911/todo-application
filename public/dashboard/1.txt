@@ -1,0 +1,15 @@
+let active_button = document.getElementsByClassName("active");
+                tasks = await fetch_data();
+                if(active_button.id=="all"){
+                    heading.innerText="All Tasks"
+                    current_tasks = tasks
+                }
+                if(active_button.id=="upcoming"){
+                    heading.innerText="Upcoming Tasks"
+                    current_tasks = tasks.filter(item=> item.status=== 'pending');
+                }
+                if(active_button.id=="completed"){
+                    heading.innerText="Completed Tasks";
+                    current_tasks = tasks.filter(item => item.status === 'completed');
+                }
+                show_data(current_tasks)

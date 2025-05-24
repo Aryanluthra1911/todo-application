@@ -101,15 +101,46 @@ app.post('/dashboard',async(req,res)=>{
         console.error('Login Error:', err);
     }
 })
-
-
+app.patch('/completed',async(req,res)=>{
+    let {title} = req.body;
+    try{
+        await tasks_credentials.findOneAndUpdate({title}, { status: "completed" });
+        res.status(200).send("Task updated")
+    }
+    catch(err){
+        console.log(err);
+    }
+})
+app.delete('/delete',async(req,res)=>{
+    let {title} = req.body;
+    try{
+        await tasks_credentials.findOneAndDelete({ title });
+        res.status(200).json({ message: "Task deleted successfully" });
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({ message: "Error deleting task" });
+    }
+})
+app.post('/details',async(req,res)=>{
+    try{
+        let {title} = req.body;
+        let task_details= await tasks_credentials.findOne({title})
+        res.send(task_details);
+    }
+    catch(err){
+        console.error("error" ,err);
+    }
+    
+})
 app.get('/',(req,res)=>{
     const token = req.cookies.token;
     if (!token){
         res.sendFile(path.join(__dirname,'public','homepage','homepage.html'))
     }
-    else return res.redirect('/dashboard');
-    
+    else{
+        return res.redirect('/dashboard');
+    }
 })
 
 app.get('/login',(req,res)=>{
@@ -127,7 +158,7 @@ app.post('/login',async(req,res)=>{
         let hashed_password = await bcrypt.hash(password, 12);
         const pass_check= await bcrypt.compare(password,user.password);
         if(pass_check){
-            const token = jwt.sign({email:email , password:hashed_password}, JWT_SECRET_KEY, { expiresIn: '11h' });
+            const token = jwt.sign({email:email , password:hashed_password}, JWT_SECRET_KEY, { expiresIn: '24h' });
             res.cookie('token',token,{
                 maxAge: 24 * 60 * 60 * 1000,
                 httpOnly: true
@@ -174,7 +205,7 @@ app.post('/signup',async(req,res)=>{
             password:hashed_password
         });
         New_credentials.save()
-        const token = jwt.sign({email:email , password:hashed_password}, JWT_SECRET_KEY, { expiresIn: '11h' });
+        const token = jwt.sign({email:email , password:hashed_password}, JWT_SECRET_KEY, { expiresIn: '24h' });
         res.cookie('token',token,{
             maxAge: 24 * 60 * 60 * 1000,
             httpOnly: true
