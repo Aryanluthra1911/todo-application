@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app= express();
-const port = 4444;
+const port = 4440;
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken');
